@@ -8,7 +8,7 @@
       <a-layout-content class="basic-form-builder__content">
         <FormPanel />
       </a-layout-content>
-      <a-layout-sider class="basic-form-builder__right" width="400">
+      <a-layout-sider class="bg-white" width="400">
         <SettingPanel />
       </a-layout-sider>
     </a-layout>
@@ -34,6 +34,8 @@ const pageTitle = computed(() => getFormDetail.value.formName);
 
 .basic-form-builder {
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 
   &__left {
     height: 100vh;
@@ -42,21 +44,15 @@ const pageTitle = computed(() => getFormDetail.value.formName);
   }
 
   &__content {
-    height: 100%;
-    height: calc(100vh - 200px);
     overflow: scroll;
+    height: 100vh;
     background-color: @bgColor;
   }
 
   &__right {
-    height: 100%;
+    height: 100vh;
     margin-left: 10px;
     background-color: @bgColor;
   }
-}
-
-/deep/ .vben-page-footer {
-  border-top: 0.5px solid #eee;
-  box-shadow: 0 -5px 5px -5px #eee;
 }
 </style>
