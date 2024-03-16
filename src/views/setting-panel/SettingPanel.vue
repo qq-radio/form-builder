@@ -1,6 +1,6 @@
 <template>
   <div v-if="isShowSetting">
-    <div class="mb-1 flex items-center border border-solid border-slate-200 p-3 pt-4 text-lg" v-if="widget">
+    <div class="title-border mb-1 flex items-center p-3 pt-4 text-lg" v-if="widget">
       <img class="mr-2 h-6 w-6" :src="widget.icon" />
       <span class="text-xl font-bold">{{ widget.name }}</span>
     </div>
@@ -66,3 +66,9 @@ const getDefaulValue = (setting: SettingItem) => {
   return value
 }
 </script>
+
+<style lang="less" scoped>
+.title-border {
+  border-bottom: 1px solid #eee;
+}
+</style>
