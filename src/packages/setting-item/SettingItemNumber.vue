@@ -1,9 +1,9 @@
 <template>
-  <a-input-number v-bind="$attrs" v-model:value="value" @change="onChange" />
+  <a-input-number v-bind="$attrs" v-model:value="value" style="width: 100%" @change="onChange" />
 </template>
 
 <script setup lang="ts">
-const emits = defineEmits(["update"]);
+const emits = defineEmits(['update'])
 
 const props = defineProps({
   defaulValue: {
@@ -26,9 +26,3 @@ const onChange = () => {
   emits('update', value.value)
 }
 </script>
-
-<style lang="less" scoped>
-.ant-input-number {
-  max-width: 50%;
-}
-</style>

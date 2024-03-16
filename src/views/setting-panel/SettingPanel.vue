@@ -1,19 +1,22 @@
 <template>
-  <div class="setting-panel" v-if="isShowSetting">
-    <div class="setting-panel__title" v-if="widget">
-      <img class="icon" :src="widget.icon" />
-      <span class="name">{{ widget.name }}</span>
+  <div v-if="isShowSetting">
+    <div class="mb-1 flex items-center border border-solid border-slate-200 p-3 pt-4 text-lg" v-if="widget">
+      <img class="mr-2 h-6 w-6" :src="widget.icon" />
+      <span class="text-xl font-bold">{{ widget.name }}</span>
     </div>
-    <div class="setting-panel__content">
-      <a-collapse v-model:activeKey="settingGroupActiveKey" :ghost="true" expandIconPosition="right">
-        <a-collapse-panel v-for='group in settingGroup' :key="group.key" :header="group.title">
-          <template v-for='settingItem in group.children' :key="settingItem.field">
-            <div class="setting-panel__content--item">
-              <div class="left">{{ settingItem.label }}</div>
-              <div class="right">
-                <component :is="getComponent(settingItem.component)" v-bind="settingItem.componentProps"
-                           @update="(value: any) => onUpdate(settingItem.field, value)"
-                           :defaulValue="getDefaulValue(settingItem)" />
+    <div>
+      <a-collapse v-model:activeKey="settingGroupActiveKey" :ghost="true" expandIconPosition="end">
+        <a-collapse-panel v-for="group in settingGroup" :key="group.key" :header="group.title">
+          <template v-for="settingItem in group.children" :key="settingItem.field">
+            <div class="mx-1.5 my-3 flex items-center justify-between">
+              <div class="mr-2.5 w-1/3">{{ settingItem.label }}</div>
+              <div class="flex-1 text-right">
+                <component
+                  :is="getComponent(settingItem.component)"
+                  v-bind="settingItem.componentProps"
+                  @update="(value: any) => onUpdate(settingItem.field, value)"
+                  :defaulValue="getDefaulValue(settingItem)"
+                />
               </div>
             </div>
           </template>
@@ -24,27 +27,24 @@
 </template>
 
 <script setup lang="ts">
-import { useFormBuilder } from '@/composables/useFormBuilder';
-import { useWidget } from '@/composables/useWidget';
-import { getComponent } from '@/packages/setting-item';
-import type { SettingItem } from '@/types/widget';
+import { useFormBuilder } from '@/composables/useFormBuilder'
+import { useWidget } from '@/composables/useWidget'
+import { getComponent } from '@/packages/setting-item'
+import type { SettingItem } from '@/types/widget'
 
-import { getObjectByKeyPath } from '@/utils';
+import { getObjectByKeyPath } from '@/utils'
 
-const {
-  getActiveFormItem,
-  updateFormItem
-} = useFormBuilder()
+const { getActiveFormItem, updateFormItem } = useFormBuilder()
 
-const { getWidgetConfig } = useWidget();
+const { getWidgetConfig } = useWidget()
 
 const widget = computed(() => getActiveFormItem.value && getWidgetConfig(getActiveFormItem.value.type))
 
-const isShowSetting = computed(() => getActiveFormItem?.value?.formItemId);
+const isShowSetting = computed(() => getActiveFormItem?.value?.formItemId)
 const settingGroup = computed(() => widget.value && widget.value.settingConfig)
 const settingGroupActiveKey = ref<string[] | undefined>()
 watchEffect(() => {
-  settingGroupActiveKey.value = settingGroup.value?.map(group => group.key)
+  settingGroupActiveKey.value = settingGroup.value?.map((group) => group.key)
 })
 
 const onUpdate = (key: string, value: any) => {
@@ -66,46 +66,3 @@ const getDefaulValue = (setting: SettingItem) => {
   return value
 }
 </script>
-
-<style lang="less" scoped>
-.setting-panel {
-  &__title {
-    font-size: 18px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-
-    .icon {
-      height: 26px;
-      width: 26px;
-      margin-right: 10px;
-    }
-
-    .name {
-      font-weight: 700;
-      font-size: 20px;
-    }
-  }
-
-  &__content {
-    &--item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 12px 6px;
-
-      .left {
-        width: 30%;
-        margin-right: 10px;
-      }
-
-      .right {
-        flex: 1;
-        text-align: right;
-      }
-    }
-  }
-}
-</style>

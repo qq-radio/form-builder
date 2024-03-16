@@ -34,8 +34,7 @@ const config: WidgetItem = {
           component: 'SettingItemNumber',
           componentProps: {
             placeholder: '请输入数字'
-          },
-          hide: true
+          }
         },
         {
           field: 'max',
@@ -43,8 +42,7 @@ const config: WidgetItem = {
           component: 'SettingItemNumber',
           componentProps: {
             placeholder: '请输入数字'
-          },
-          hide: true
+          }
         }
       ]
     }

@@ -6,7 +6,6 @@ const config: WidgetItem = {
   name: '多行文本',
   sequence: 3,
   icon,
-  hide: true,
   formConfig: {
     valueComponent: 'ValueItemDisabledTextarea',
     placeholder: '请输入多行文本'
@@ -32,7 +31,10 @@ const config: WidgetItem = {
         {
           field: 'max',
           label: '最大输入字符数',
-          component: 'SettingItemNumber'
+          component: 'SettingItemNumber',
+          componentProps: {
+            placeholder: '请输入最大输入字符数'
+          }
         }
       ]
     }

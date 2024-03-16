@@ -1,31 +1,9 @@
 <template>
-  <div class="button">
-    <img class='icon' :src="icon" />
-    获取地理位置
+  <div class="flex w-full cursor-not-allowed items-center justify-center rounded bg-blue-500/70 p-1.5 text-white">
+    <img class="mr-3 h-4 w-4" :src="icon" />获取地理位置
   </div>
 </template>
 
 <script setup lang="ts">
-import icon from '@/assets/location-white.png';
+import icon from '@/assets/location-white.png'
 </script>
-
-<style lang="less" scoped>
-.button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 6px;
-  background-color: #0960bd;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: not-allowed;
-
-  .icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-  }
-}
-</style>

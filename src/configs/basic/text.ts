@@ -6,7 +6,6 @@ const config: WidgetItem = {
   name: '文本',
   sequence: 2,
   icon,
-  hide: true,
   formConfig: {
     valueComponent: 'ValueItemDisabledInput',
     placeholder: '请输入文本'

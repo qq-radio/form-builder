@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-const emits = defineEmits(["update"]);
+const emits = defineEmits(['update'])
 
 const props = defineProps({
   defaulValue: {

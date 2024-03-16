@@ -1,33 +1,26 @@
 <template>
-  <div>
-    <a-button type="primary">表单预览</a-button>
-    <a-button @click="openPreviewJsonModal">JSON预览</a-button>
-    <a-button v-if="false" type="primary">查看数据</a-button>
-    <PreviewJsonModal v-model:visible="isShowPreviewJsonModal" />
+  <div class="mb-2.5 flex items-center justify-between bg-white px-4 py-3">
+    <div class="text-lg font-semibold">创建表单</div>
+    <div>
+      <a-button class="mr-2.5" type="primary" @click="openPreviewJsonModal">JSON预览</a-button>
+      <a-button class="mr-2.5">表单预览</a-button>
+      <a-button>查看数据</a-button>
+      <PreviewJsonModal v-model:visible="isPreviewJsonModalVisible" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useFormBuilder } from '@/composables/useFormBuilder';
+import { useFormBuilder } from '@/composables/useFormBuilder'
+import PreviewJsonModal from './PreviewJsonModal.vue'
 
-import PreviewJsonModal from './PreviewJsonModal.vue';
+const { getForm } = useFormBuilder()
 
-const {
-  getForm,
-} = useFormBuilder()
-
-
-const isShowPreviewJsonModal = ref(false);
-const previewJsonParams = ref();
+const isPreviewJsonModalVisible = ref(false)
+const previewJsonParams = ref()
 
 const openPreviewJsonModal = () => {
   previewJsonParams.value = getForm.value
-  isShowPreviewJsonModal.value = true;
+  isPreviewJsonModalVisible.value = true
 }
 </script>
-
-<style lang="less" scoped>
-.ant-btn {
-  margin-right: 6px;
-}
-</style>

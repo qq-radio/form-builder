@@ -1,6 +1,13 @@
 <template>
-  <Draggable group="widget-drag" v-model="getForm" item-key="formItemId" ghost-class="drag-ghost" class="min-h-full"
-             animation="340" @add="onFormItemAdd" @update="onFormItemSortUpdate">
+  <Draggable
+    group="widget-drag"
+    v-model="getForm"
+    item-key="formItemId"
+    ghost-class="drag-ghost"
+    animation="340"
+    @add="onFormItemAdd"
+    @update="onFormItemSortUpdate"
+  >
     <template #item="{ element }">
       <FormItemWrapper :formItem="element">
         <template #value>
@@ -12,22 +19,18 @@
 </template>
 
 <script setup lang="ts">
-import { useFormBuilder } from '@/composables/useFormBuilder';
-import { useWidget } from '@/composables/useWidget';
-import { getComponent } from '@/packages/value-item';
-import type { FormItem } from '@/types/form';
+import { useFormBuilder } from '@/composables/useFormBuilder'
+import { useWidget } from '@/composables/useWidget'
+import { getComponent } from '@/packages/value-item'
+import type { FormItem } from '@/types/form'
 
-import Draggable from "vuedraggable";
+import Draggable from 'vuedraggable'
 
-import FormItemWrapper from './FormItemWrapper.vue';
+import FormItemWrapper from './FormItemWrapper.vue'
 
-const {
-  getForm,
-  createFormItem,
-  sortFormItem,
-} = useFormBuilder()
+const { getForm, createFormItem, sortFormItem } = useFormBuilder()
 
-const { getWidgetConfig } = useWidget();
+const { getWidgetConfig } = useWidget()
 
 const getComponentByType = (element: FormItem) => {
   const widget = getWidgetConfig(element.type)
@@ -41,24 +44,24 @@ const getBeforeAndAfterPosition = (itemIndex: number) => {
   switch (itemIndex) {
     case 0:
       afterFormItem = getForm.value[itemIndex + 1]
-      break;
+      break
     case getForm.value.length - 1:
       beforeFormItem = getForm.value[itemIndex - 1]
-      break;
+      break
     default:
       beforeFormItem = getForm.value[itemIndex - 1]
       afterFormItem = getForm.value[itemIndex + 1]
-      break;
+      break
   }
   return {
     beforePosition: beforeFormItem!.sort,
-    afterPosition: afterFormItem!.sort,
+    afterPosition: afterFormItem!.sort
   }
 }
 
 type DragEvent = {
-  newIndex: number;
-  [key: string]: any;
+  newIndex: number
+  [key: string]: any
 }
 
 const onFormItemAdd = async (event: DragEvent) => {

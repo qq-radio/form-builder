@@ -1,9 +1,8 @@
 <template>
   <div class="flex items-center justify-end">
-    <img class='w-6 h-6 mr-1' v-if="isHasDivideSetting" :src="ImageSuccess" />
+    <img class="mr-1 h-6 w-6" v-if="isHasDivideSetting" :src="ImageSuccess" />
     <a-button class="w-20" type="primary" @click="openModal">去设置</a-button>
-    <a-modal title="设置相除函数" :visible="isVisible" :width="640" :closable="false" :keyboard="false" @ok="onOk"
-             @cancel="onClose">
+    <a-modal title="设置相除函数" :visible="isVisible" :width="640" :closable="false" :keyboard="false" @ok="onOk" @cancel="onClose">
       <div class="flex justify-center px-6 py-4">
         <div class="w-2/4">
           <div class="mb-2">请选择除数题目</div>
@@ -23,18 +22,15 @@
 </template>
 
 <script setup lang="ts">
-import type { SchemeDivideObject, RadioOption, FormItem } from '@/types/form';
-import { useFormBuilder } from '@/composables/useFormBuilder';
-import ImageSuccess from '@/assets/success.png';
+import type { SchemeDivideObject, RadioOption, FormItem } from '@/types/form'
+import { useFormBuilder } from '@/composables/useFormBuilder'
+import ImageSuccess from '@/assets/success.png'
 
 import { clone } from 'remeda'
 
-const emits = defineEmits(['update']);
+const emits = defineEmits(['update'])
 
-const {
-  getActiveFormItem,
-  excludeSelf
-} = useFormBuilder()
+const { getActiveFormItem, excludeSelf } = useFormBuilder()
 
 const isVisible = ref<boolean>(false)
 let divisorOptions: RadioOption[] = []
@@ -42,7 +38,7 @@ let dividendOptions: RadioOption[] = []
 
 const defaultDivideObjectValue = {
   divisorFormItemId: '',
-  dividendFormItemId: '',
+  dividendFormItemId: ''
 }
 const divideObjectInput = ref<SchemeDivideObject>(defaultDivideObjectValue)
 const isHasDivideSetting = computed(() => {
@@ -51,7 +47,7 @@ const isHasDivideSetting = computed(() => {
 })
 
 const formDatasToRadioOptions = (formDatas: FormItem[]) => {
-  return formDatas?.map(formItem => ({
+  return formDatas?.map((formItem) => ({
     label: `${formItem.sequence}.${formItem.label}`,
     value: formItem.formItemId
   }))
@@ -68,7 +64,7 @@ const openModal = () => {
 
 const onOk = async () => {
   const divideObject = divideObjectInput.value
-  emits('update', divideObject);
+  emits('update', divideObject)
   onClose()
 }
 

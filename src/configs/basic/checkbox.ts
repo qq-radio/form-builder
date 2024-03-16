@@ -7,7 +7,6 @@ const config: WidgetItem = {
   name: '多选',
   sequence: 5,
   icon,
-  hide: true,
   formConfig: {
     valueComponent: 'ValueItemSelect',
     selectIcon,
